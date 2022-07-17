@@ -1,0 +1,34 @@
+<h2>Por Pais</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <app-pais-input 
+        (onEnter)="buscar($event)"
+        (onDebounce)="sugerencias($event)"
+        ></app-pais-input>
+    </div>
+</div>
+<ul 
+    *ngIf="mostrarSugerencias"
+    class="list-group">
+    <li 
+    *ngFor="let pais of paisesSugeridos"
+    class="list-group-item"
+    (click)="buscar(pais.name.common)"
+    >
+        {{pais.name.common}}
+
+    </li>
+
+</ul>
+<hr>
+<div *ngIf="hayError" class="alert alert-danger">
+    No se encontro nada con el termino {{termino}}
+</div>
+<div class="row">
+    <div class="col">
+        <app-pais-table [paises]="paises" [hayError]="hayError"></app-pais-table>
+        
+    </div>
+</div>
